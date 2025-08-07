@@ -52,6 +52,8 @@ if(!isLogin()){
     <!--end::Third Party Plugin(Bootstrap Icons)-->
     <!--begin::Required Plugin(AdminLTE)-->
     <link rel="stylesheet" href="<?php echo _HOST_URL_TEMPLATES; ?>/assets/css/adminlte.css" />
+    <link rel="stylesheet" href="<?php echo _HOST_URL_TEMPLATES; ?>/assets/css/custom.css?ver<?php echo rand();?>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
     <!--end::Required Plugin(AdminLTE)-->
     <!-- apexcharts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css"
@@ -104,7 +106,8 @@ if(!isLogin()){
                             </li>
                             <!--begin::Menu Footer-->
                             <li class="user-footer">
-                                <a href="#" style="width: 100%" class="btn btn-default btn-flat float-end">Sign out</a>
+                                <a href="?module=auth&action=logout" style="width: 100%"
+                                    class="btn btn-default btn-flat float-end">Đăng xuất</a>
                             </li>
                             <!--end::Menu Footer-->
                         </ul>

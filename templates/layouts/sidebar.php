@@ -8,7 +8,7 @@ if(!defined('_TAI')) {
     <!--begin::Sidebar Brand-->
     <div class="sidebar-brand">
         <!--begin::Brand Link-->
-        <a href="./index.html" class="brand-link">
+        <a href="<?php echo _HOST_URL;?>" class="brand-link">
             <!--begin::Brand Image-->
             <img src="https://hienu.vn/wp-content/uploads/2021/10/logo-4-800x800.png" alt="AdminLTE Logo"
                 class="brand-image opacity-75 shadow" />
@@ -27,7 +27,7 @@ if(!defined('_TAI')) {
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                 aria-label="Main navigation" data-accordion="false" id="navigation">
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="<?php echo _HOST_URL;?>" class="nav-link active">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>
                             Dashboard
@@ -46,19 +46,19 @@ if(!defined('_TAI')) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./widgets/small-box.html" class="nav-link">
+                            <a href="?module=course&action=list" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Danh sách</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./widgets/info-box.html" class="nav-link">
+                            <a href="?module=course&action=add" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Thêm khóa học mới</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./widgets/cards.html" class="nav-link">
+                            <a href="?module=course_category&action=list" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Lĩnh vực</p>
                             </a>
@@ -76,13 +76,13 @@ if(!defined('_TAI')) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./layout/unfixed-sidebar.html" class="nav-link">
+                            <a href="?module=users&action=list" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Danh sách tài khoản</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./layout/fixed-sidebar.html" class="nav-link">
+                            <a href="?module=users&action=add" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Tạo mới tài khoản</p>
                             </a>
@@ -102,7 +102,7 @@ if(!defined('_TAI')) {
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./forms/general.html" class="nav-link">
+                            <a href="?module=student" class="nav-link">
                                 <i class="nav-icon bi bi-circle"></i>
                                 <p>Danh sách</p>
                             </a>
