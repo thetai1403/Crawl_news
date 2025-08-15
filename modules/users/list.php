@@ -30,7 +30,7 @@ if(isGet()){
         }else {
             $chuoiWhere .= ' AND ';
         }
-        $chuoiWhere .= "fullname LIKE '%$keyword%' OR email LIKE '%$keyword%'";
+        $chuoiWhere .= "a.fullname LIKE '%$keyword%' OR a.email LIKE '%$keyword%'";
 }
 
     if(!empty($group)){
@@ -39,13 +39,13 @@ if(isGet()){
         }else {
             $chuoiWhere .= ' AND ';
         }
-        $chuoiWhere .= " group_id = $group "; 
+        $chuoiWhere .= " a.group_id = $group "; 
     }
 }
 
 //Xử lý phân trang
 $maxData = getRows("SELECT id FROM users"); //Tổng dữ liệu
-$perPage = 5; //Số dòng dữ liệu một trang
+$perPage = 3; //Số dòng dữ liệu một trang
 $maxPage=ceil($maxData/$perPage);
 $offset = 0;
 $page = 1;
@@ -73,15 +73,34 @@ ORDER BY a.created_at DESC
 LIMIT $offset, $perPage
 ");
 
-$getGroup = getAll("SELECT * FROM `groups`")
+$getGroup = getAll("SELECT * FROM `groups`");
 
 
+//Xử lý Query
+if(!empty($_SERVER)){
+    $queryString = $_SERVER['QUERY_STRING'];
+    $queryString = str_replace('&page='.$page, '', $queryString);
+}
+
+if($group > 0 || !empty($keyword) ){
+    $maxData2 = getRows("SELECT a.id
+FROM users a $chuoiWhere");
+$maxPage = ceil($maxData2/$perPage);
+}
+
+$msg = getSessionFlash('msg');
+$msg_type = getSessionFlash('msg_type');
 ?>
 <div class="container-fluid grid-user">
 
     <a href="?module=users&action=add" class="btn btn-success mb-3"><i class="fa-solid fa-plus"></i>Thêm mới người
         dùng</a>
-
+    <?php 
+                if(!empty($msg) && !empty($msg_type)){
+                    getMsg($msg,$msg_type);
+                }
+                
+                ?>
     <form class="mb-3" action="" method="get">
         <input type="hidden" name="module" value="users">
         <input type="hidden" name="action" value="list">
@@ -151,7 +170,7 @@ $getGroup = getAll("SELECT * FROM `groups`")
             if($page>1):
             ?>
             <li class="page-item"><a class="page-link"
-                    href="?module=users&action=list&page=<?php echo $page-1;?>">Trước</a></li>
+                    href="?<?php echo $queryString?>&page=<?php echo $page-1;?>">Trước</a></li>
             <?php 
             endif;
             ?>
@@ -168,7 +187,7 @@ $getGroup = getAll("SELECT * FROM `groups`")
             if($start>1):
             ?>
             <li class="page-item"><a class="page-link"
-                    href="?module=users&action=list&page=<?php echo $page-1;?>">...</a></li>
+                    href="?<?php echo $queryString?>&page=<?php echo $page-1;?>">...</a></li>
             <?php 
             endif;
 
@@ -183,7 +202,7 @@ $getGroup = getAll("SELECT * FROM `groups`")
             <?php for($i = $start; $i<=$end; $i++):?>
 
             <li class="page-item <?php echo($page == $i) ? 'active': false?>"><a class="page-link"
-                    href="?module=users&action=list&page=<?php echo $i; ?>"><?php echo $i;?></a>
+                    href="?<?php echo $queryString?>&page=<?php echo $i; ?>"><?php echo $i;?></a>
             </li>
 
             <?php 
@@ -191,7 +210,7 @@ $getGroup = getAll("SELECT * FROM `groups`")
                 if($end < $maxPage):
             ?>
             <li class="page-item"><a class="page-link"
-                    href="?module=users&action=list&page=<?php echo $page+1;?>">...</a></li>
+                    href="?<?php echo $queryString?>&page=<?php echo $page+1;?>">...</a></li>
 
             <?php endif; ?>
 
@@ -202,7 +221,7 @@ $getGroup = getAll("SELECT * FROM `groups`")
             if($page<$maxPage):
             ?>
             <li class="page-item"><a class="page-link"
-                    href="?module=users&action=list&page=<?php echo $page+1;?>">Sau</a></li>
+                    href="?<?php echo $queryString?>&page=<?php echo $page+1;?>">Sau</a></li>
             <?php 
             endif;
             ?>
